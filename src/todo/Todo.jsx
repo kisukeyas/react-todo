@@ -3,11 +3,7 @@ import './Todo.css';
 const getKey = () => Math.random().toString(32).substring(2);
 
 function Todo() {
-    const [item, setItem] = useState([
-        {key: getKey(), text: 'Learn JavaScript', done: false},
-        {key: getKey(), text: 'Learn JavaScript', done: false},
-        {key: getKey(), text: 'Learn JavaScript', done: false},
-    ])
+    const [item, setItem] = useState([])
 
     const handleCheck = checked => {
         const newItem = item.map(item => {
@@ -19,39 +15,55 @@ function Todo() {
         setItem(newItem);
     }
 
+    const handleDelete = i => {
+        setItem(item.filter((item,index) => (index !== i)));
+    }
+
+    const handleAdd = text =>{
+        setItem([...item, { key: getKey(), text, done: false }])
+    }
+
     return (
-        <div>
-            <Input item={item}/>
-            {item.map(item => (
-                <Item item={item} checkBox={handleCheck} key={item.key}/>
+        <div className='container'>
+            <h1>Todo App</h1>
+            <Input onAdd={handleAdd}/>
+            {item.map((item, index) => (
+                <Item item={item} index={index} checkedItem={handleCheck} key={item.key} deleteItems={handleDelete}/>
             ))}
         </div>
     )
 }
 
-function Input() {
-    const [name, setItem] = useState('taro');
-    const nameChange = (i) => setItem(i.target.value)
+function Input({onAdd}) {
+    const [text, setText] = useState('');
+    const textChange = (i) => setText(i.target.value)
+    const submitItem = () => {
+        onAdd(text);
+        setText('');
+    }
     return(
-        <>
-            <p>Hello {name}</p>
-            <input type="text" onChange={nameChange}/>
-        </>
+        <div className='input'>
+            <input type="text" onChange={textChange} value={text}/>
+            <button type="submit" onClick={submitItem}>作成</button>
+        </div>
     );
 }
 
-function Nav(params) {
-}
-
-function Item({item, checkBox}) {
+function Item({item, checkedItem, deleteItems, index}) {
     const handleChange = () => {
-        checkBox(item);
+        checkedItem(item);
     };
+
+    const deleteItem = () => {
+        deleteItems(index);
+    };
+
     return (
-        <div>
+        <div className='task_component'>
             <input type="checkbox" name="" id="" onChange={handleChange}/>
-            {item.key} : {item.text}
-            {item.done ? <label>完了</label> : ""}
+            Task {index+1}:{item.text}
+            {item.done ? <label>Done</label> : ""}
+            <button type='submit' onClick={() => deleteItem(index)}>X</button>
         </div>
     )
 }
