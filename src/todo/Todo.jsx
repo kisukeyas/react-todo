@@ -28,7 +28,7 @@ function Todo() {
             <h1>Todo App</h1>
             <Input onAdd={handleAdd}/>
             {item.map((item, index) => (
-                <Item item={item} index={index} checkedItem={handleCheck} key={item.key} deleteItems={handleDelete}/>
+                <Item item={item} index={index} checkedItem={handleCheck} key={item.key} deleteItem={handleDelete}/>
             ))}
         </div>
     )
@@ -49,13 +49,13 @@ function Input({onAdd}) {
     );
 }
 
-function Item({item, checkedItem, deleteItems, index}) {
+function Item({item, checkedItem, deleteItem, index}) {
     const handleChange = () => {
         checkedItem(item);
     };
 
-    const deleteItem = () => {
-        deleteItems(index);
+    const handleDelete = () => {
+        deleteItem(index);
     };
 
     return (
@@ -63,7 +63,7 @@ function Item({item, checkedItem, deleteItems, index}) {
             <input type="checkbox" name="" id="" onChange={handleChange}/>
             Task {index+1}:{item.text}
             {item.done ? <label>Done</label> : ""}
-            <button type='submit' onClick={() => deleteItem(index)}>X</button>
+            <button type='submit' onClick={handleDelete}>X</button>
         </div>
     )
 }
