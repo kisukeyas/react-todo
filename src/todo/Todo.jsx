@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './Todo.css';
-const getKey = () => Math.random().toString(32).substring(2);
 
 function Todo() {
     const [item, setItem] = useState([])
@@ -10,7 +9,7 @@ function Todo() {
     }
 
     const handleAdd = text =>{
-        setItem([...item, { key: getKey(), text, done: false }])
+        setItem([...item, { text, done: false }])
     }
 
     return (
@@ -49,7 +48,7 @@ function Item({item, deleteItem, index}) {
 
     return (
         <div className='task_component'>
-            <input type="checkbox" name="" id="" onChange={handleChange}/>
+            <input type="checkbox" name="" id="" onChange={handleChange} value={check}/>
             Task {index+1}:{item.text}
             {check ? <label>Done</label> : ""}
             <button type='submit' onClick={handleDelete}>X</button>
