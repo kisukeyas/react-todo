@@ -12,15 +12,41 @@ function Todo() {
         setItem([...item, { text, done: false }])
     }
 
+    const [filter, setFilter] = useState('ALL');
+
+    const handleFilter = value => setFilter(value);
+
+    const displayItem = item.filter(item => {
+            if (filter === 'ALL') return true;
+            if (filter === 'TODO') return !item.done;
+            if (filter === 'ALL') return item.done;
+        });
+
     return (
         <div className='container'>
+
             <h1>Todo App</h1>
             <Input onAdd={handleAdd}/>
-            {item.map((item, index) => (
+            <Filter changeFilter={handleFilter}/>
+            {displayItem.map((item, index) => (
                 <Item item={item} index={index} deleteItem={handleDelete}/>
             ))}
         </div>
     )
+}
+
+function Filter({changeFilter}) {
+    const handleFilter = (e) => {
+        changeFilter(e)
+    }
+
+    return (
+        <nav>
+            <a href="#" onClick={() => handleFilter('ALL')}>All</a>
+            <a href="#" onClick={() => handleFilter('TODO')}>ToDo</a>
+            <a href="#" onClick={() => handleFilter('DONE')}>Done</a>
+        </nav>
+    );
 }
 
 function Input({onAdd}) {
