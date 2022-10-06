@@ -5,21 +5,36 @@ function Todo() {
     const [item, setItem] = useState([])
 
     const handleDelete = i => {
-        setItem(item.filter((item,index) => (index !== i)));
+        setItem(item.filter((item) => (item.id !== i)));
     }
 
     const handleAdd = text =>{
-        setItem([...item, { text, done: false }])
+        const newIndex = item.length + 1;
+        setItem([...item, { id:newIndex, text, done: false }]);
     }
+
+    const handleChange = i => setItem(item.map(item => {
+        if (item.id === i) {
+            item.done = !item.done
+        };
+        return item
+    }));
 
     const [filter, setFilter] = useState('ALL');
 
     const handleFilter = value => setFilter(value);
 
     const displayItem = item.filter(item => {
-            if (filter === 'ALL') return true;
-            if (filter === 'TODO') return !item.done;
-            if (filter === 'ALL') return item.done;
+            switch (filter) {
+                case 'ALL':
+                    return true;
+                case 'TODO':
+                    return !item.done;
+                case 'DONE':
+                    return item.done;
+                default:
+                    return item;
+            }
         });
 
     return (
@@ -27,24 +42,25 @@ function Todo() {
 
             <h1>Todo App</h1>
             <Input onAdd={handleAdd}/>
-            <Filter changeFilter={handleFilter}/>
+            <Filter changeFilter={handleFilter} value={filter}/>
             {displayItem.map((item, index) => (
-                <Item item={item} index={index} deleteItem={handleDelete}/>
+                <Item item={item} index={index} deleteItem={handleDelete} checkChenge={handleChange}/>
             ))}
         </div>
     )
 }
 
 function Filter({changeFilter}) {
-    const handleFilter = (e) => {
-        changeFilter(e)
+    const handleFilter = (key, e) => {
+        e.preventDefault();
+        changeFilter(key)
     }
 
     return (
         <nav>
-            <a href="#" onClick={() => handleFilter('ALL')}>All</a>
-            <a href="#" onClick={() => handleFilter('TODO')}>ToDo</a>
-            <a href="#" onClick={() => handleFilter('DONE')}>Done</a>
+            <a href="#" onClick={handleFilter.bind(null, 'ALL')}>All</a>
+            <a href="#" onClick={handleFilter.bind(null, 'TODO')}>ToDo</a>
+            <a href="#" onClick={handleFilter.bind(null, 'DONE')}>Done</a>
         </nav>
     );
 }
@@ -64,19 +80,21 @@ function Input({onAdd}) {
     );
 }
 
-function Item({item, deleteItem, index}) {
-    const [check, setCheck] = useState();
-    const handleChange = () => setCheck(item.done = !item.done);
+function Item({item, deleteItem, checkChenge}) {
 
     const handleDelete = () => {
-        deleteItem(index);
+        deleteItem(item.id);
     };
+
+    const handleChange = () => {
+        checkChenge(item.id);
+    }
 
     return (
         <div className='task_component'>
-            <input type="checkbox" name="" id="" onChange={handleChange} value={check}/>
-            Task {index+1}:{item.text}
-            {check ? <label>Done</label> : ""}
+            <input type="checkbox" name="" id="" onChange={handleChange} checked={item.done}/>
+            Task {item.id}:{item.text}
+            {item.done ? <label>Done</label> : ""}
             <button type='submit' onClick={handleDelete}>X</button>
         </div>
     )
