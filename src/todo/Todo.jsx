@@ -9,8 +9,8 @@ function Todo() {
         setItem(item.filter((item) => (item.id !== i)));
     }
 
-    const handleAdd = text =>{
-        setItem([...item, { id:getKey(), text, done: false }]);
+    const handleAdd = (text, date)=>{
+        setItem([...item, { id:getKey(), text, done: false, date}]);
     }
 
     const handleEditText = (i, text) => setItem(item.map(item => {
@@ -74,14 +74,18 @@ function Filter({changeFilter}) {
 
 function Input({onAdd}) {
     const [text, setText] = useState('');
-    const textChange = (i) => setText(i.target.value)
+    const textChange = (e) => setText(e.target.value);
+    const [date, setDate] = useState('');
+    const dateChange = (e) => setDate(e.target.value);
     const submitItem = () => {
-        onAdd(text);
+        onAdd(text, date);
         setText('');
+        setDate('');
     }
     return(
         <div className='input'>
             <input type="text" onChange={textChange} value={text}/>
+            <input type="date" onChange={dateChange} value={date}/>
             <button type="submit" onClick={submitItem}>作成</button>
         </div>
     );
@@ -115,6 +119,7 @@ function Item({item, deleteItem, checkChenge, editText}) {
         <div className='task_component'>
             <input type="checkbox" name="" id="" onChange={handleChange} checked={item.done}/>
             {isEdit? <input type="text" name="" id="" onChange={textChange} value={text}/>: item.text}
+            {item.date}
             {item.done ? <label>Done</label> : ""}
             {!isEdit?<button type='submit' onClick={startEdit}>編集</button>:<button type='submit' onClick={endEdit}>編集終了</button>}
             <button type='submit' onClick={handleDelete}>X</button>
