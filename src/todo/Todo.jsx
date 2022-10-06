@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Todo.css';
+const getKey = () => Math.random().toString(32).substring(2);
 
 function Todo() {
     const [item, setItem] = useState([])
@@ -9,9 +10,15 @@ function Todo() {
     }
 
     const handleAdd = text =>{
-        const newIndex = item.length + 1;
-        setItem([...item, { id:newIndex, text, done: false }]);
+        setItem([...item, { id:getKey(), text, done: false }]);
     }
+
+    const handleEditText = (i, text) => setItem(item.map(item => {
+            if (item.id === i) {
+                item.text = text
+            };
+            return item;
+    }));
 
     const handleChange = i => setItem(item.map(item => {
         if (item.id === i) {
@@ -44,7 +51,7 @@ function Todo() {
             <Input onAdd={handleAdd}/>
             <Filter changeFilter={handleFilter} value={filter}/>
             {displayItem.map((item, index) => (
-                <Item item={item} index={index} deleteItem={handleDelete} checkChenge={handleChange}/>
+                <Item item={item} index={index} deleteItem={handleDelete} checkChenge={handleChange} editText={handleEditText}/>
             ))}
         </div>
     )
@@ -80,7 +87,9 @@ function Input({onAdd}) {
     );
 }
 
-function Item({item, deleteItem, checkChenge}) {
+function Item({item, deleteItem, checkChenge, editText}) {
+    const [text, setText] = useState('');
+    const textChange = (i) => setText(i.target.value)
 
     const handleDelete = () => {
         deleteItem(item.id);
@@ -90,15 +99,27 @@ function Item({item, deleteItem, checkChenge}) {
         checkChenge(item.id);
     }
 
+    const [isEdit, setIsEdit] = useState(false);
+
+    const startEdit = () => {
+        setText(item.text);
+        setIsEdit(true);
+    }
+
+    const endEdit = () => {
+        editText(item.id, text);
+        setIsEdit(false);
+    }
+
     return (
         <div className='task_component'>
             <input type="checkbox" name="" id="" onChange={handleChange} checked={item.done}/>
-            Task {item.id}:{item.text}
+            {isEdit? <input type="text" name="" id="" onChange={textChange} value={text}/>: item.text}
             {item.done ? <label>Done</label> : ""}
+            {!isEdit?<button type='submit' onClick={startEdit}>編集</button>:<button type='submit' onClick={endEdit}>編集終了</button>}
             <button type='submit' onClick={handleDelete}>X</button>
         </div>
     )
 }
-
 
 export default Todo;
