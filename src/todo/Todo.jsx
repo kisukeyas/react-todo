@@ -24,7 +24,6 @@ function Todo() {
     const handleEditText = (i, text, date) => setItem(item.map(item => {
             if (item.id === i) {
                 item.text = text;
-                item.date = date;
             };
             return item;
     }));
@@ -166,6 +165,7 @@ function Item({item, deleteItem, checkChenge, editText}) {
             {isEdit? <TextField label="Edit your Task" variant="standard" onChange={textChange} value={text} fullWidth/>: item.text}
             </TableCell>
             <TableCell>
+            {isEdit?
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DatePicker
                         label="Basic example"
@@ -176,6 +176,7 @@ function Item({item, deleteItem, checkChenge, editText}) {
                         renderInput={(params) => <TextField {...params} variant="standard" />}
                     />
                 </LocalizationProvider>
+                : item.value.$y+"年"+item.value.$M+"月"+item.value.$D+"日" }
             </TableCell>
             <TableCell align='right'>
             {!isEdit?<Button type='submit' onClick={startEdit}><ModeEditIcon/></Button>:<Button color="secondary" type='submit' onClick={endEdit}><ModeEditIcon /></Button>}
