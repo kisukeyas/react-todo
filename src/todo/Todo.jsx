@@ -1,12 +1,10 @@
-import { BottomNavigation, Button, Checkbox, Container, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, TextField, } from '@mui/material';
+import { Button, Checkbox, Container, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, TextField, } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import { useState } from 'react';
 import './Todo.css';
-import { ClassNames } from '@emotion/react';
 
 const getKey = () => Math.random().toString(32).substring(2);
 
@@ -21,7 +19,7 @@ function Todo() {
         setItem([...item, { id:getKey(), text, done: false, value}]);
     }
 
-    const handleEditText = (i, text, date) => setItem(item.map(item => {
+    const handleEditText = (i, text) => setItem(item.map(item => {
             if (item.id === i) {
                 item.text = text;
             };
@@ -57,9 +55,17 @@ function Todo() {
             <h1>Todo App</h1>
             <TableContainer component={Paper}>
                 <Table>
+                <Filter changeFilter={handleFilter} value={filter}/>
+                </Table>
+                <Table>
                     <TableHead>
-                        <Filter changeFilter={handleFilter} value={filter}/>
                         <Input onAdd={handleAdd}/>
+                        <TableRow>
+                            <TableCell colSpan={1}>Check Box</TableCell>
+                            <TableCell colSpan={6}>Task Name</TableCell>
+                            <TableCell colSpan={2} align='right'>Limit Date</TableCell>
+                            <TableCell colSpan={1} align='right'>Edit Delete</TableCell>
+                        </TableRow>
                     </TableHead>
                     <TableBody>
                         {displayItem.map((item, index) => (
@@ -78,20 +84,22 @@ function Input({onAdd}) {
     const submitItem = () => {
         onAdd(text, value);
         setText('');
-        setValue(null);
+        setValue('');
     }
 
-    const [value, setValue] = useState(null);
+    const [value, setValue] = useState('');
 
     return(
         <>
         <TableRow>
-            <TableCell colSpan={5}>
+            <TableCell colSpan={10}>
                 <TextField label="Add your Task" variant="standard" onChange={textChange} value={text} fullWidth/>
             </TableCell>
         </TableRow>
         <TableRow>
-            <TableCell colSpan={4} align='right'>
+            <TableCell colSpan={1}></TableCell>
+            <TableCell colSpan={6}></TableCell>
+            <TableCell align='right' colSpan={2}>
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DatePicker
                         label="Basic example"
@@ -99,12 +107,12 @@ function Input({onAdd}) {
                         onChange={(newValue) => {
                             setValue(newValue);
                         }}
-                        renderInput={(params) => <TextField {...params} variant="standard" />}
+                        renderInput={(params) => <TextField {...params} variant="standard"/>}
                     />
                 </LocalizationProvider>
             </TableCell>
-            <TableCell colSpan={1}>
-            <Button onClick={submitItem} fullWidth><AddCircleRoundedIcon/></Button>
+            <TableCell colSpan={1} align='right'>
+            <Button onClick={submitItem} variant="contained" >Create Task</Button>
             </TableCell>
         </TableRow>
         </>
@@ -119,7 +127,7 @@ function Filter({changeFilter}) {
 
     return (
         <TableRow>
-            <TableCell colSpan={5}>
+            <TableCell colSpan={4}>
                 <Tabs variant="fullWidth">
                     <Tab label='All' onClick={handleFilter.bind(null, 'ALL')} />
                     <Tab label='ToDo' onClick={handleFilter.bind(null, 'TODO')} />
@@ -158,13 +166,13 @@ function Item({item, deleteItem, checkChenge, editText}) {
 
     return (
         <TableRow component="th" className='task_component'>
-            <TableCell>
+            <TableCell colSpan={1}>
             <Checkbox color='success' onChange={handleChange} checked={item.done}/>
             </TableCell>
-            <TableCell>
+            <TableCell colSpan={6}>
             {isEdit? <TextField label="Edit your Task" variant="standard" onChange={textChange} value={text} fullWidth/>: item.text}
             </TableCell>
-            <TableCell>
+            <TableCell align='right' colSpan={2}>
             {isEdit?
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DatePicker
@@ -178,10 +186,8 @@ function Item({item, deleteItem, checkChenge, editText}) {
                 </LocalizationProvider>
                 : item.value.$y+"年"+item.value.$M+"月"+item.value.$D+"日" }
             </TableCell>
-            <TableCell align='right'>
+            <TableCell align='right' colSpan={1}>
             {!isEdit?<Button type='submit' onClick={startEdit}><ModeEditIcon/></Button>:<Button color="secondary" type='submit' onClick={endEdit}><ModeEditIcon /></Button>}
-            </TableCell>
-            <TableCell>
             <Button type='submit' onClick={handleDelete}><DeleteIcon/></Button>
             </TableCell>
         </TableRow>
