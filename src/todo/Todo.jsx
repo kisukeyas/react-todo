@@ -64,7 +64,8 @@ function Todo() {
                             <TableCell colSpan={1}>Check Box</TableCell>
                             <TableCell colSpan={6}>Task Name</TableCell>
                             <TableCell colSpan={2} align='right'>Limit Date</TableCell>
-                            <TableCell colSpan={1} align='right'>Edit Delete</TableCell>
+                            <TableCell colSpan={1} align='right'>Edit</TableCell>
+                            <TableCell colSpan={1} align='right'>Delete</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -92,14 +93,14 @@ function Input({onAdd}) {
     return(
         <>
         <TableRow>
-            <TableCell colSpan={10}>
+            <TableCell colSpan={11}>
                 <TextField label="Add your Task" variant="standard" onChange={textChange} value={text} fullWidth/>
             </TableCell>
         </TableRow>
         <TableRow>
             <TableCell colSpan={1}></TableCell>
-            <TableCell colSpan={6}></TableCell>
-            <TableCell align='right' colSpan={2}>
+            <TableCell colSpan={8}></TableCell>
+            <TableCell align='right' colSpan={1}>
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DatePicker
                         label="Basic example"
@@ -169,10 +170,10 @@ function Item({item, deleteItem, checkChenge, editText}) {
             <TableCell colSpan={1}>
             <Checkbox color='success' onChange={handleChange} checked={item.done}/>
             </TableCell>
-            <TableCell colSpan={6}>
+            <TableCell colSpan={4}>
             {isEdit? <TextField label="Edit your Task" variant="standard" onChange={textChange} value={text} fullWidth/>: item.text}
             </TableCell>
-            <TableCell align='right' colSpan={2}>
+            <TableCell align='right' colSpan={4}>
             {isEdit?
                 <LocalizationProvider dateAdapter={AdapterDayjs} >
                     <DatePicker
@@ -188,6 +189,8 @@ function Item({item, deleteItem, checkChenge, editText}) {
             </TableCell>
             <TableCell align='right' colSpan={1}>
             {!isEdit?<Button type='submit' onClick={startEdit}><ModeEditIcon/></Button>:<Button color="secondary" type='submit' onClick={endEdit}><ModeEditIcon /></Button>}
+            </TableCell>
+            <TableCell align='right' colSpan={1}>
             <Button type='submit' onClick={handleDelete}><DeleteIcon/></Button>
             </TableCell>
         </TableRow>
