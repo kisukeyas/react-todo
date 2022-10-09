@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Todo.css';
+import styles from './Todo.module.css';
 const getKey = () => Math.random().toString(32).substring(2);
 
 function Todo() {
@@ -45,7 +45,7 @@ function Todo() {
         });
 
     return (
-        <div className='container'>
+        <div className={styles.container}>
 
             <h1>Todo App</h1>
             <Input onAdd={handleAdd}/>
@@ -83,7 +83,7 @@ function Input({onAdd}) {
         setDate('');
     }
     return(
-        <div className='input'>
+        <div className={styles.input}>
             <input type="text" onChange={textChange} value={text}/>
             <input type="date" onChange={dateChange} value={date}/>
             <button type="submit" onClick={submitItem}>作成</button>
@@ -116,7 +116,7 @@ function Item({item, deleteItem, checkChenge, editText}) {
     }
 
     return (
-        <div className='task_component'>
+        <div className={styles.task_component}>
             <input type="checkbox" name="" id="" onChange={handleChange} checked={item.done}/>
             {isEdit? <input type="text" name="" id="" onChange={textChange} value={text}/>: item.text}
             {item.date}
