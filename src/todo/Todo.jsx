@@ -45,31 +45,17 @@ function Todo() {
         });
 
     return (
-        <div className={styles.container}>
-
+        <main className={styles.container}>
             <h1>Todo App</h1>
             <Input onAdd={handleAdd}/>
             <Filter changeFilter={handleFilter} value={filter}/>
-            {displayItem.map((item, index) => (
-                <Item item={item} index={index} deleteItem={handleDelete} checkChenge={handleChange} editText={handleEditText}/>
-            ))}
-        </div>
+            <ul>
+                {displayItem.map((item, index) => (
+                    <Item item={item} index={index} deleteItem={handleDelete} checkChenge={handleChange} editText={handleEditText}/>
+                ))}
+            </ul>
+        </main>
     )
-}
-
-function Filter({changeFilter}) {
-    const handleFilter = (key, e) => {
-        e.preventDefault();
-        changeFilter(key)
-    }
-
-    return (
-        <nav>
-            <a href="#" onClick={handleFilter.bind(null, 'ALL')}>All</a>
-            <a href="#" onClick={handleFilter.bind(null, 'TODO')}>ToDo</a>
-            <a href="#" onClick={handleFilter.bind(null, 'DONE')}>Done</a>
-        </nav>
-    );
 }
 
 function Input({onAdd}) {
@@ -83,11 +69,26 @@ function Input({onAdd}) {
         setDate('');
     }
     return(
-        <div className={styles.input}>
-            <input type="text" onChange={textChange} value={text}/>
-            <input type="date" onChange={dateChange} value={date}/>
-            <button type="submit" onClick={submitItem}>作成</button>
+        <div className={styles.input_container}>
+            <button className={styles.card} type="submit" onClick={submitItem}></button>
+            <input type="text" onChange={textChange} value={text} className={styles.text_box} placeholder="Create new todo ..."/>
+            <input type="date" onChange={dateChange} value={date} className={styles.date_box}/>
         </div>
+    );
+}
+
+function Filter({changeFilter}) {
+    const handleFilter = (key, e) => {
+        e.preventDefault();
+        changeFilter(key)
+    }
+
+    return (
+        <nav className={styles.filter_component}>
+            <a href="#" onClick={handleFilter.bind(null, 'ALL')}>All</a>
+            <a href="#" onClick={handleFilter.bind(null, 'TODO')}>ToDo</a>
+            <a href="#" onClick={handleFilter.bind(null, 'DONE')}>Done</a>
+        </nav>
     );
 }
 
@@ -116,14 +117,14 @@ function Item({item, deleteItem, checkChenge, editText}) {
     }
 
     return (
-        <div className={styles.task_component}>
+        <li className={styles.item_container}>
             <input type="checkbox" name="" id="" onChange={handleChange} checked={item.done}/>
             {isEdit? <input type="text" name="" id="" onChange={textChange} value={text}/>: item.text}
             {item.date}
             {item.done ? <label>Done</label> : ""}
             {!isEdit?<button type='submit' onClick={startEdit}>編集</button>:<button type='submit' onClick={endEdit}>編集終了</button>}
             <button type='submit' onClick={handleDelete}>X</button>
-        </div>
+        </li>
     )
 }
 

@@ -1,22 +1,62 @@
 .container {
     text-align: center;
+    width: min(85%, 54rem);
+    margin: auto;
 }
 
-.input{
-    margin: 20px;
+.input_container{
+    box-shadow: 0 0 2rem 0.4rem hsl(0, 0%, 0%, 0.1);
+    display: flex;
+    margin: 4rem 0 2.5rem 0;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.9rem 2rem;
 }
 
-.input input{
-    width: 35%; /*親要素いっぱい広げる*/
-    padding: 8px 12px; /*ボックスを大きくする*/
-    font-size: 14px;
-    border-radius: 3px; /*ボックス角の丸み*/
-    border: 2px solid #ddd; /*枠線*/
-    box-sizing: border-box; /*横幅の解釈をpadding, borderまでとする*/
-    margin: 0 20px;
+.card {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 0;
+    background-color: aqua;
 }
 
-.task_component{
-    text-align: left;
-    margin: 0 32%;
+.text_box{
+    width:  42%;
+    padding: 0.7rem 0;
+    border: 0;
+}
+
+.date_box{
+    width: 42%;
+    padding: 0.7rem 0;
+    border: 0;
+}
+
+.filter_component{
+    box-shadow: 0 -1rem 2rem -0.4rem hsl(0, 0%, 0%, 0.1);
+    display: flex;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background-color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.9rem 2rem;
+    border-bottom: solid black 1px;
+}
+
+ul{
+    list-style: none;
+    box-shadow: 0 1rem 2rem 0.4rem hsl(0, 0%, 0%, 0.1);
+}
+
+.item_container{
+    border-bottom: solid black 1px;
+    display: flex;
+    border-radius: 0.5rem 0.5rem 0 0;
+    background-color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.9rem 2rem;
 }
