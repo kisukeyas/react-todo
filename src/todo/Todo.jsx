@@ -1,5 +1,14 @@
 import { useState } from 'react';
 import styles from './Todo.module.css';
+import { Button, Checkbox, IconButton } from '@mui/material';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
 const getKey = () => Math.random().toString(32).substring(2);
 
 function Todo() {
@@ -13,9 +22,10 @@ function Todo() {
         setItem([...item, { id:getKey(), text, done: false, date}]);
     }
 
-    const handleEditText = (i, text) => setItem(item.map(item => {
+    const handleEditText = (i, text, date) => setItem(item.map(item => {
             if (item.id === i) {
-                item.text = text
+                item.text = text;
+                item.date = date;
             };
             return item;
     }));
@@ -48,12 +58,14 @@ function Todo() {
         <main className={styles.container}>
             <h1>Todo App</h1>
             <Input onAdd={handleAdd}/>
-            <Filter changeFilter={handleFilter} value={filter}/>
-            <ul>
-                {displayItem.map((item, index) => (
-                    <Item item={item} index={index} deleteItem={handleDelete} checkChenge={handleChange} editText={handleEditText}/>
-                ))}
-            </ul>
+            <div className={styles.item_list}>
+                <Filter changeFilter={handleFilter} value={filter}/>
+                <ul>
+                    {displayItem.map((item, index) => (
+                        <Item item={item} index={index} deleteItem={handleDelete} checkChenge={handleChange} editText={handleEditText}/>
+                    ))}
+                </ul>
+            </div>
         </main>
     )
 }
@@ -70,7 +82,7 @@ function Input({onAdd}) {
     }
     return(
         <div className={styles.input_container}>
-            <button className={styles.card} type="submit" onClick={submitItem}></button>
+            <IconButton className={styles.check_btn} type="submit" onClick={submitItem} color='primary'><AddCircleIcon /></IconButton>
             <input type="text" onChange={textChange} value={text} className={styles.text_box} placeholder="Create new todo ..."/>
             <input type="date" onChange={dateChange} value={date} className={styles.date_box}/>
         </div>
@@ -94,7 +106,9 @@ function Filter({changeFilter}) {
 
 function Item({item, deleteItem, checkChenge, editText}) {
     const [text, setText] = useState('');
-    const textChange = (i) => setText(i.target.value)
+    const textChange = (i) => setText(i.target.value);
+    const [date, setDate] = useState('');
+    const dateChange = (e) => setDate(e.target.value);
 
     const handleDelete = () => {
         deleteItem(item.id);
@@ -108,22 +122,26 @@ function Item({item, deleteItem, checkChenge, editText}) {
 
     const startEdit = () => {
         setText(item.text);
+        setDate(item.date);
         setIsEdit(true);
     }
 
     const endEdit = () => {
-        editText(item.id, text);
+        editText(item.id, text, date);
         setIsEdit(false);
     }
 
     return (
         <li className={styles.item_container}>
-            <input type="checkbox" name="" id="" onChange={handleChange} checked={item.done}/>
-            {isEdit? <input type="text" name="" id="" onChange={textChange} value={text}/>: item.text}
-            {item.date}
-            {item.done ? <label>Done</label> : ""}
-            {!isEdit?<button type='submit' onClick={startEdit}>編集</button>:<button type='submit' onClick={endEdit}>編集終了</button>}
-            <button type='submit' onClick={handleDelete}>X</button>
+            <Checkbox icon={<CheckCircleOutlineIcon />} checkedIcon={<CheckCircleIcon color='success'/>} className={styles.check_btn} onChange={handleChange} checked={item.done}/>
+            <div>
+                {isEdit? <input type="text" onChange={textChange} value={text} className={styles.text_box} placeholder="Create new todo ..."/>: item.text}
+            </div>
+            <div>
+                {isEdit? <input type="date" onChange={dateChange} value={date} className={styles.date_box}/>: item.date}
+            </div>
+            {!isEdit?<IconButton type='submit' onClick={startEdit}><BorderColorOutlinedIcon /></IconButton>:<IconButton type='submit' onClick={endEdit}><BorderColorIcon color='success'/></IconButton>}
+            <IconButton type='submit' onClick={handleDelete}><DeleteIcon /></IconButton>
         </li>
     )
 }
