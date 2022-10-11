@@ -89,6 +89,7 @@ ul{
     .input_box{
         width:  85%;
         margin-left: 0;
+        border: solid 1px;
     }
     .filter_component{
         padding: 0.5rem 1.5rem;
