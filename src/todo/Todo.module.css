@@ -75,3 +75,27 @@ ul{
 .error_message{
     color: rgb(211, 47, 47);
 }
+
+@media screen and (max-width: 480px) {
+	/* 480px以下に適用されるCSS（スマホ用） */
+    .container {
+        font-size: 0.9rem;
+    }
+    .input_container{
+        margin: 2rem 0 1rem 0;
+        padding: 0.5rem 1.5rem;
+    }
+    .input_box{
+        width:  34%;
+    }
+    .filter_component{
+        padding: 0.5rem 1.5rem;
+    }
+    .item_container{
+        padding: 0.5rem 1.5rem;
+    }
+    .box_edit{
+        width: 18%;
+    }
+
+}
