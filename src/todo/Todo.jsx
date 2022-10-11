@@ -57,7 +57,7 @@ function Todo() {
 
     return (
         <main className={styles.container}>
-            <h1>Todo App Edit</h1>
+            <h1>Todo App</h1>
             <Input onAdd={handleAdd}/>
             <div className={styles.item_list}>
                 <Filter changeFilter={handleFilter} filter={filter}/>
