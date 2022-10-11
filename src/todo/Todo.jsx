@@ -89,7 +89,7 @@ function Input({onAdd}) {
                 {errors.task ? <p className={styles.error_message}>{errors.task.message}</p>:'' }
             </div>
             <div className={styles.input_box}>
-                <input type="date" {...register('date', {required: 'fill in date'})}/>
+                <input type="date" value="1990-1-1" {...register('date', {required: 'fill in date'})}/>
                 {errors.date ? <p className={styles.error_message}>{errors.date.message}</p>:'' }
             </div>
         </div>
