@@ -3,6 +3,7 @@
     text-align: center;
     width: min(85%, 54rem);
     margin: auto;
+    padding-top: 50px;
 }
 
 .input_container{
@@ -10,28 +11,25 @@
     display: flex;
     margin: 4rem 0 2.5rem 0;
     border-radius: 0.5rem;
-    background-color: #fff;
-    justify-content: space-between;
     align-items: center;
     padding: 1.9rem 2rem;
+    text-align: left;
 }
 
 .check_btn {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
+
 }
 
-.text_box{
-    width:  42%;
+.input_box{
+    width:  36%;
+    margin-left: 2rem;
     padding: 0.7rem 0;
     border: 0;
-}
-
-.date_box{
-    width: 42%;
-    padding: 0.7rem 0;
-    border: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .item_list{
@@ -41,8 +39,7 @@
 .filter_component{
     display: flex;
     border-radius: 0.5rem 0.5rem 0 0;
-    background-color: #fff;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 1.9rem 2rem;
 }
@@ -55,8 +52,26 @@ ul{
     border-top: solid hsl(252, 21%, 94%) 0.2rem;
     display: flex;
     border-radius: 0 0 0.5rem 0.5rem;
-    background-color: #fff;
-    justify-content: space-between;
     align-items: center;
     padding: 1.9rem 2rem;
+    text-align: left;
+}
+
+.box_edit{
+    width: 36%;
+    margin-left: 2rem;
+    padding: 0.7rem 0;
+}
+
+.edit_icon{
+    margin-left: auto;
+}
+
+.sentence_done{
+    text-decoration: line-through;
+    color: hsl(252, 6%, 83%);
+}
+
+.error_message{
+    color: rgb(211, 47, 47);
 }
