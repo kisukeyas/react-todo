@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "privacyPolicy": "Privacy Policy"
+  },
+  "hero": {
+    "title": "Talk Diary",
+    "subtitle": "Your thoughts become a diary, just by speaking",
+    "description": "No writing or typing required. Create your diary with just your voice. AI automatically organizes your words into a beautiful diary.",
+    "downloadButton": "Download on the App Store",
+    "comingSoon": "Coming Soon"
+  },
+  "features": {
+    "title": "Features of Talk Diary",
+    "subtitle": "Diary creation made easy with voice input",
+    "items": {
+      "voice": {
+        "title": "Easy Voice Recording",
+        "description": "Complete your diary just by speaking. No keyboard input required."
+      },
+      "ai": {
+        "title": "AI Auto-Formatting",
+        "description": "Automatically converts your spoken words into a readable diary format."
+      },
+      "time": {
+        "title": "Time-Saving & Sustainable",
+        "description": "Build a lasting diary habit with just one voice entry per day."
+      },
+      "privacy": {
+        "title": "Privacy Protection",
+        "description": "Data stored only on your device. No cloud sync for your peace of mind."
+      },
+      "habit": {
+        "title": "Daily Habit",
+        "description": "Reflect on your day once daily to build a consistent journaling habit."
+      },
+      "offline": {
+        "title": "Completely Offline",
+        "description": "No internet connection required. Privacy-focused design."
+      }
+    }
+  },
+  "steps": {
+    "title": "Easy 3-Step Process",
+    "step1": {
+      "title": "Open App & Start Recording",
+      "description": "One tap to start recording"
+    },
+    "step2": {
+      "title": "Talk About Your Day",
+      "description": "Speak freely about whatever comes to mind"
+    },
+    "step3": {
+      "title": "AI Creates Your Diary",
+      "description": "A beautifully organized diary is complete"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Feel free to reach out with any questions or requests",
+    "emailNote": "This will open your email app. We'd love to hear from you!",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Submit",
+    "submitted": "Submitted"
+  }
+}

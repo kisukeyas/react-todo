@@ -1,0 +1,67 @@
+{
+  "nav": {
+    "privacyPolicy": "プライバシーポリシー"
+  },
+  "hero": {
+    "title": "Talk Diary",
+    "subtitle": "話すだけで、あなたの想いが日記になる",
+    "description": "手書きもタイピングも不要。音声だけで簡単に日記を作成できる革新的なアプリです。AIが自動的にあなたの言葉を整理し、美しい日記に仕上げます。",
+    "downloadButton": "App Storeでダウンロード",
+    "comingSoon": "近日公開予定"
+  },
+  "features": {
+    "title": "Talk Diaryの特徴",
+    "subtitle": "音声入力で、日記作成がこんなに簡単に",
+    "items": {
+      "voice": {
+        "title": "音声で簡単記録",
+        "description": "話すだけで日記が完成。キーボード入力は一切不要です。"
+      },
+      "ai": {
+        "title": "AI自動整形",
+        "description": "話した内容を自動で読みやすい日記形式に変換します。"
+      },
+      "time": {
+        "title": "時短で継続",
+        "description": "1日1回の音声入力で、継続的な日記習慣を実現。"
+      },
+      "privacy": {
+        "title": "プライバシー保護",
+        "description": "データは端末内にのみ保存。クラウド同期なしで安心。"
+      },
+      "habit": {
+        "title": "1日1回の習慣",
+        "description": "毎日1回、その日の出来事を振り返る習慣づくり。"
+      },
+      "offline": {
+        "title": "完全オフライン",
+        "description": "インターネット接続不要。プライバシー重視設計。"
+      }
+    }
+  },
+  "steps": {
+    "title": "使い方は簡単3ステップ",
+    "step1": {
+      "title": "アプリを開いて録音開始",
+      "description": "ワンタップで録音スタート"
+    },
+    "step2": {
+      "title": "今日の出来事を話す",
+      "description": "思いついたまま自由に話してください"
+    },
+    "step3": {
+      "title": "AIが自動で日記を作成",
+      "description": "整理された美しい日記が完成"
+    }
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "subtitle": "ご質問・ご要望はこちらからお気軽にどうぞ",
+    "emailNote": "メールアプリが開きます。お気軽にご連絡ください。",
+    "name": "お名前",
+    "email": "メールアドレス",
+    "message": "メッセージ",
+    "submit": "送信する",
+    "submitted": "送信しました"
+  }
+}
