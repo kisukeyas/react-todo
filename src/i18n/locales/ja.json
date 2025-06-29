@@ -1,6 +1,7 @@
 {
   "nav": {
-    "privacyPolicy": "プライバシーポリシー"
+    "privacyPolicy": "プライバシーポリシー",
+    "termsOfService": "利用規約"
   },
   "hero": {
     "title": "Talk Diary",
